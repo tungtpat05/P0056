@@ -306,10 +306,6 @@ public class Main {
 
                 case 4: //List salary adjustion info
                     workerController.displaySalaryInfo();
-                    System.out.printf("|%-25s|%-25s|%-25s|%-25s|%-25s|%-25s|\n",
-                            "Code", "Name", "Age", "Salary", "Status", "Date");
-                    System.out.printf("|%-25s|%-25s|%-25s|%-25.2f|%-25s|%-25s|\n",
-                            "01", "Tung", "18", 2500.00, "UP", "13/06/2025");
                     break;
 
                 case 5:
