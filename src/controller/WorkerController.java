@@ -12,7 +12,7 @@ import model.SalaryHistory;
 import model.Worker;
 import service.WorkerService;
 import view.WorkerView;
-import workerDTO.WorkerDTO;
+import dto.WorkerDTO;
 
 /**
  * Created by Tungtpat05 on Jun 11, 2025.

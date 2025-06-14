@@ -8,7 +8,7 @@ import controller.WorkerController;
 import java.util.Scanner;
 import utils.MyException;
 import utils.Validator;
-import workerDTO.WorkerDTO;
+import dto.WorkerDTO;
 
 /**
  * Created by Tungtpat05 on Jun 11, 2025.
