@@ -12,6 +12,7 @@ import java.util.List;
  */
 public class WorkerView {
     private String header;
+    private String body;
     private List<String> list = new ArrayList<>();
 
     //Setter & Getter
@@ -23,6 +24,15 @@ public class WorkerView {
         this.header = header;
     }
 
+    public String getBody() {
+        return body;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
+    }
+
+    
     public List<String> getList() {
         return list;
     }
@@ -34,6 +44,11 @@ public class WorkerView {
     //Print header
     public void printHeader() {
         System.out.println(header);
+    }
+    
+    //Print body
+    public void printBody() {
+        System.out.println(body);
     }
     
     //Print list

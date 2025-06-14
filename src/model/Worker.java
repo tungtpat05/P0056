@@ -103,7 +103,7 @@ public class Worker {
 
     @Override
     public String toString() {
-        return String.format("%-20s %-20s %-20d %-20f", id, name, age, salary);
+        return String.format("%-25s%-25s%-25d%-25.2f", id, name, age, salary);
     }
 
 }

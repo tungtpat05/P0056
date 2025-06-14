@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
 package service;
 
 import java.util.ArrayList;
@@ -14,9 +13,10 @@ import model.Worker;
 import utils.GetLocalDate;
 
 /**
- *Created by Tungtpat05 on Jun 11, 2025.
+ * Created by Tungtpat05 on Jun 11, 2025.
  */
 public class WorkerService {
+
     private List<Worker> workerList = new ArrayList<>();
     private Map<String, List<SalaryHistory>> salaryHistoryMap = new HashMap<>();
 
@@ -28,50 +28,58 @@ public class WorkerService {
     public void setWorkerList(List<Worker> workerList) {
         this.workerList = workerList;
     }
-    
-    
+
+    public Map<String, List<SalaryHistory>> getSalaryHistoryMap() {
+        return salaryHistoryMap;
+    }
+
+    public void setSalaryHistoryMap(Map<String, List<SalaryHistory>> salaryHistoryMap) {
+        this.salaryHistoryMap = salaryHistoryMap;
+    }
+
     //Up Salary
     public void upSalary(String id, double adjustedMoney) {
         for (Worker worker : workerList) {
-            if(worker.getId().equalsIgnoreCase(id)) {
-                
+            if (worker.getId().equalsIgnoreCase(id)) {
+
                 //Up salary
                 worker.setSalary(worker.getSalary() + adjustedMoney);
-                
+
                 //Initial new salary history
                 SalaryHistory salaryHistory = new SalaryHistory(constants.SalaryStatus.UP, GetLocalDate.getDate());
-                
+
                 //Create a new arraylist if the id does not exist in MAP, if it exists, do nothing.
                 salaryHistoryMap.putIfAbsent(id, new ArrayList<>());
-                
+
                 //Add a new history to ArrayList
                 salaryHistoryMap.get(id).add(salaryHistory);
             }
         }
     }
-    
+
     //Down Salary
     public void downSalary(String id, double adjustedMoney) {
         for (Worker worker : workerList) {
-            if(worker.getId().equalsIgnoreCase(id)) {
-                
+            if (worker.getId().equalsIgnoreCase(id)) {
+
                 //Down salary
-                //Missing case amount <0
-                //Missing case amount <0
-                //Missing case amount <0
-                worker.setSalary(worker.getSalary() - adjustedMoney); 
-                
-                //Initial new salary history
-                SalaryHistory salaryHistory = new SalaryHistory(constants.SalaryStatus.DOWN, GetLocalDate.getDate());
-                
-                //Create a new arraylist if the id does not exist in MAP, if it exists, do nothing.
-                salaryHistoryMap.putIfAbsent(id, new ArrayList<>());
-                
-                //Add a new history to ArrayList
-                salaryHistoryMap.get(id).add(salaryHistory);
+                double amount = worker.getSalary() - adjustedMoney;
+                if (amount < 0) {
+                    System.out.println(constants.Message.MSG_FAIL + constants.Message.MSG_INVALID_AMOUNT);
+                } else {
+                    worker.setSalary(amount);
+                    //Initial new salary history
+                    SalaryHistory salaryHistory = new SalaryHistory(constants.SalaryStatus.DOWN, GetLocalDate.getDate());
+
+                    //Create a new arraylist if the id does not exist in MAP, if it exists, do nothing.
+                    salaryHistoryMap.putIfAbsent(id, new ArrayList<>());
+
+                    //Add a new history to ArrayList
+                    salaryHistoryMap.get(id).add(salaryHistory);
+                }
+
             }
         }
     }
-    
-    
+
 }
