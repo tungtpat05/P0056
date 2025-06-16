@@ -9,5 +9,5 @@ package constants;
  * @author nguye
  */
 public enum SalaryStatus {
-    UP, DOWN;
+    UP, DOWN, DEFAULT;
 }

@@ -4,7 +4,9 @@
  */
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
+import utils.GetLocalDate;
 
 /**
  * Created by Tungtpat05 on Jun 11, 2025.
@@ -25,22 +27,15 @@ public class Worker {
     }
 
     //Parameter constructor
-    public Worker(String id, String name, int age, double salary, String workLocation, List<SalaryHistory> salaryHistoryList) {
-        this.id = id;
-        this.name = name;
-        this.age = age;
-        this.salary = salary;
-        this.workLocation = workLocation;
-        this.salaryHistoryList = salaryHistoryList;
-    }
-    
-    //Custom Parameter constructor
     public Worker(String id, String name, int age, double salary, String workLocation) {
         this.id = id;
         this.name = name;
         this.age = age;
         this.salary = salary;
         this.workLocation = workLocation;
+        salaryHistoryList = new ArrayList<>();
+        this.salaryHistoryList.add(new SalaryHistory(salary, constants.SalaryStatus.DEFAULT, GetLocalDate.getDate()));
+
     }
 
     //Setter & Getter
@@ -99,11 +94,14 @@ public class Worker {
     public void setSalaryHistoryList(List<SalaryHistory> salaryHistoryList) {
         this.salaryHistoryList = salaryHistoryList;
     }
-  
 
     @Override
     public String toString() {
-        return String.format("%-25s%-25s%-25d%-25.2f", id, name, age, salary);
+        StringBuilder result = new StringBuilder();
+        for (SalaryHistory salaryHistory : salaryHistoryList) {
+            result.append(String.format("%-25s%-25s%-25d", id, name, age)).append(salaryHistory.toString()).append("\n");
+        }
+        return result.toString();
     }
 
 }

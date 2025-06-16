@@ -5,12 +5,11 @@
 package service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import model.SalaryHistory;
 import model.Worker;
 import utils.GetLocalDate;
+import utils.WorkerException;
 
 /**
  * Created by Tungtpat05 on Jun 11, 2025.
@@ -18,7 +17,6 @@ import utils.GetLocalDate;
 public class WorkerService {
 
     private List<Worker> workerList = new ArrayList<>();
-    private Map<String, List<SalaryHistory>> salaryHistoryMap = new HashMap<>();
 
     //Setter & Getter
     public List<Worker> getWorkerList() {
@@ -27,14 +25,6 @@ public class WorkerService {
 
     public void setWorkerList(List<Worker> workerList) {
         this.workerList = workerList;
-    }
-
-    public Map<String, List<SalaryHistory>> getSalaryHistoryMap() {
-        return salaryHistoryMap;
-    }
-
-    public void setSalaryHistoryMap(Map<String, List<SalaryHistory>> salaryHistoryMap) {
-        this.salaryHistoryMap = salaryHistoryMap;
     }
 
     //Up Salary
@@ -46,13 +36,11 @@ public class WorkerService {
                 worker.setSalary(worker.getSalary() + adjustedMoney);
 
                 //Initial new salary history
-                SalaryHistory salaryHistory = new SalaryHistory(constants.SalaryStatus.UP, GetLocalDate.getDate());
+                SalaryHistory salaryHistory = new SalaryHistory(worker.getSalary(), constants.SalaryStatus.UP, GetLocalDate.getDate());
 
-                //Create a new arraylist if the id does not exist in MAP, if it exists, do nothing.
-                salaryHistoryMap.putIfAbsent(id, new ArrayList<>());
+                //Add to history list
+                worker.getSalaryHistoryList().add(salaryHistory);
 
-                //Add a new history to ArrayList
-                salaryHistoryMap.get(id).add(salaryHistory);
             }
         }
     }
@@ -64,22 +52,21 @@ public class WorkerService {
 
                 //Down salary
                 double amount = worker.getSalary() - adjustedMoney;
-                if (amount < 0) {
-                    System.out.println(constants.Message.MSG_FAIL + constants.Message.MSG_INVALID_AMOUNT);
-                } else {
+                if (amount >= 0) {
                     worker.setSalary(amount);
                     //Initial new salary history
-                    SalaryHistory salaryHistory = new SalaryHistory(constants.SalaryStatus.DOWN, GetLocalDate.getDate());
+                    SalaryHistory salaryHistory = new SalaryHistory(worker.getSalary(), constants.SalaryStatus.UP, GetLocalDate.getDate());
 
-                    //Create a new arraylist if the id does not exist in MAP, if it exists, do nothing.
-                    salaryHistoryMap.putIfAbsent(id, new ArrayList<>());
+                    //Add to history list
+                    worker.getSalaryHistoryList().add(salaryHistory);
 
-                    //Add a new history to ArrayList
-                    salaryHistoryMap.get(id).add(salaryHistory);
+                    break;
+
                 }
+
+                throw new WorkerException(constants.Message.MSG_INVALID_AMOUNT);
 
             }
         }
     }
-
 }

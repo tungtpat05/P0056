@@ -6,7 +6,7 @@ package main;
 
 import controller.WorkerController;
 import java.util.Scanner;
-import utils.MyException;
+import utils.WorkerException;
 import utils.Validator;
 import dto.WorkerDTO;
 
@@ -39,11 +39,11 @@ public class Main {
                     //Out loop
                     break;
 
-                } catch (MyException e) {
+                } catch (WorkerException e) {
                     System.out.println(e.getMessage());
                     //Continue loop
                 } catch (NumberFormatException e) {
-                    System.out.println("Please input an integer!");
+                    System.out.println(constants.Message.MSG_INPUT_INTEGER);
                 }
             }
 
@@ -67,7 +67,7 @@ public class Main {
                             //Out loop
                             break;
 
-                        } catch (MyException e) {
+                        } catch (WorkerException e) {
                             System.out.println(e.getMessage());
                             //Continue loop
                         }
@@ -88,7 +88,7 @@ public class Main {
                             //Out loop
                             break;
 
-                        } catch (MyException e) {
+                        } catch (WorkerException e) {
                             System.out.println(e.getMessage());
                             //Continue loop
                         }
@@ -109,11 +109,11 @@ public class Main {
                             //Out loop
                             break;
 
-                        } catch (MyException e) {
+                        } catch (WorkerException e) {
                             System.out.println(e.getMessage());
                             //Continue loop
                         } catch (NumberFormatException e) {
-                            System.out.println("Please input an integer number!");
+                            System.out.println(constants.Message.MSG_INT_IN_RANGE);
                         }
                     }
 
@@ -132,11 +132,11 @@ public class Main {
                             //Out loop
                             break;
 
-                        } catch (MyException e) {
+                        } catch (WorkerException e) {
                             System.out.println(e.getMessage());
                             //Continue loop
                         } catch (NumberFormatException e) {
-                            System.out.println("Please input an double number!");
+                            System.out.println(constants.Message.MSG_DOUBLE_IN_RANGE);
                         }
                     }
 
@@ -155,7 +155,7 @@ public class Main {
                             //Out loop
                             break;
 
-                        } catch (MyException e) {
+                        } catch (WorkerException e) {
                             System.out.println(e.getMessage());
                             //Continue loop
                         }
@@ -197,7 +197,7 @@ public class Main {
                             //Out loop
                             break;
 
-                        } catch (MyException e) {
+                        } catch (WorkerException e) {
                             System.out.println(e.getMessage());
                             //Continue loop
                         }
@@ -218,11 +218,11 @@ public class Main {
                             //Out loop
                             break;
 
-                        } catch (MyException e) {
+                        } catch (WorkerException e) {
                             System.out.println(e.getMessage());
                             //Continue loop
                         } catch (NumberFormatException e) {
-                            System.out.println("Please input an double number!");
+                            System.out.println(constants.Message.MSG_DOUBLE_IN_RANGE);
                         }
                     }
 
@@ -260,7 +260,7 @@ public class Main {
                             //Out loop
                             break;
 
-                        } catch (MyException e) {
+                        } catch (WorkerException e) {
                             System.out.println(e.getMessage());
                             //Continue loop
                         }
@@ -281,11 +281,11 @@ public class Main {
                             //Out loop
                             break;
 
-                        } catch (MyException e) {
+                        } catch (WorkerException e) {
                             System.out.println(e.getMessage());
                             //Continue loop
                         } catch (NumberFormatException e) {
-                            System.out.println("Please input an double number!");
+                            System.out.println(constants.Message.MSG_DOUBLE_IN_RANGE);
                         }
                     }
 
@@ -297,10 +297,14 @@ public class Main {
                     workerController.setInputInfo(workerDTO);
 
                     //Call Add function from controller
-                    if (workerController.downSalary()) {
-                        System.out.println(constants.Message.MSG_SUCCESS);
-                    } else {
-                        System.out.println(constants.Message.MSG_FAIL + constants.Message.MSG_NOT_EXISTED_ID);
+                    try {
+                        if (workerController.downSalary()) {
+                            System.out.println(constants.Message.MSG_SUCCESS);
+                        } else {
+                            System.out.println(constants.Message.MSG_FAIL + constants.Message.MSG_NOT_EXISTED_ID);
+                        }
+                    } catch (WorkerException e) {
+                        System.out.println(e);
                     }
                     break;
 

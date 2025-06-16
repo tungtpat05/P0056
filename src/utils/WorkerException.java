@@ -9,9 +9,9 @@ package utils;
  */
 
 //Extends RuntimeException để không cần throws như khi khi extends Exception
-public class MyException extends RuntimeException {
+public class WorkerException extends RuntimeException {
 
-    public MyException(String message) {
+    public WorkerException(String message) {
         super(message); //lưu vào nội bộ của lớp RuntimeException.
     }
 }

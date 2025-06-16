@@ -11,6 +11,7 @@ import constants.SalaryStatus;
  */
 public class SalaryHistory {
 
+    private double salaryCurrent;
     private SalaryStatus status;
     private String date;
 
@@ -19,7 +20,8 @@ public class SalaryHistory {
     }
 
     //Parameter constructor
-    public SalaryHistory(SalaryStatus status, String date) {
+    public SalaryHistory(double salaryCurrent, SalaryStatus status, String date) {
+        this.salaryCurrent = salaryCurrent;
         this.status = status;
         this.date = date;
     }
@@ -39,6 +41,19 @@ public class SalaryHistory {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public double getSalaryCurrent() {
+        return salaryCurrent;
+    }
+
+    public void setSalaryCurrent(double salaryCurrent) {
+        this.salaryCurrent = salaryCurrent;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%-25.2f%-25s%-25s", salaryCurrent, status, date);
     }
 
 }

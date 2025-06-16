@@ -18,7 +18,7 @@ public class Validator {
     //Check string input
     public static void validateNonEmpty(String input) {
         if (input == null || input.trim().isEmpty()) {
-            throw new MyException("Input must not be empty.");
+            throw new WorkerException(constants.Message.MSG_INPUT_STRING);
         }
     }
 
@@ -26,7 +26,7 @@ public class Validator {
     public static void validateDoubleInRange(double inputNumber, double min, double max) {
         //Check number in range
         if (inputNumber < min || max < inputNumber) {
-            throw new MyException(String.format("Please input a number between %.2f $ and %.2f $\n", min, max));
+            throw new WorkerException(String.format(constants.Message.MSG_DOUBLE_IN_RANGE, min, max));
         }
     }
     
@@ -34,7 +34,7 @@ public class Validator {
     public static void validateIntInRange(int inputNumber, int min, int max) {
         //Check number in range
         if (inputNumber < min || max < inputNumber) {
-            throw new MyException(String.format("Please input a number between %d and %d\n", min, max));
+            throw new WorkerException(String.format(constants.Message.MSG_INT_IN_RANGE, min, max));
         }
     }
 

@@ -76,23 +76,13 @@ public class WorkerController {
 
     //List salary info
     public void displaySalaryInfo() {
-        //Get map of history from SERVICE
-        Map<String, List<SalaryHistory>> salaryHistoryMap = workerService.getSalaryHistoryMap();
 
         //Create new list for storing result
         List<String> result = new ArrayList<>();
 
         //Iterate through list
         for (Worker worker : workerList) {
-            String id = worker.getId();
-
-            //With each id, take salary changing info
-            for (SalaryHistory salaryHistory : salaryHistoryMap.get(id)) {
-                String statusAndDate = String.format("%-25s%-25s", salaryHistory.getStatus(), salaryHistory.getDate());
-
-                // put full info to result list
-                result.add(worker.toString() + statusAndDate);
-            }
+            result.add(worker.toString());
         }
 
         //Set info to Wiew and print
